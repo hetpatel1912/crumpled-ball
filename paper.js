@@ -1,25 +1,27 @@
-class Paper {
-    constructor(){
-        var options ={
-            isStatic: true,
-            restitution:0.3,
-            friction:0,
-            density :1.2
-        }
-
-        this.x=x
-        this.y=y
-        this.r=r
-        this.image = loadImage("paper.png")
-        this.body = Bodies.circles(this.x,this.y,(this.r-20)/2,options)
-        World.add(world,this.body)
+class Paper{
+    constructor(x,y,r, width, height) {
+        var options = {
+            'density':1.2,
+            'friction': 0,
+            'restitution':0.5
+        };
+        this.width = width;
+        this.height = height;
+        this.r = r;
+        this.image = loadImage("paper.png");
+        this.body = Bodies.circle(x, y, (this.r-20)/2, options);
+        World.add(world, this.body);
     }
     display(){
-        paperpos = this.body.position
-        push()
-        translate(paperpos.x,paperpos.y)
-        fill(255,0,255)
+
+        var pos = this.body.position;
+        var angle = this.body.angle;
+        push();
+        translate(pos.x, pos.y);
+        rotate(angle);
         imageMode(CENTER);
-			image(this.image, paperpos.x, paperpos.y,paperpos.r)
-    }
+        image(this.image, 0, 0, this.width, this.height);
+        pop();
+	}
+  
 }
